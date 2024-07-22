@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     provideState({ name: 'user', reducer: AuthReducer}),
-    provideEffects(),
+    provideEffects(AuthEffects),
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes, withComponentInputBinding()),
     provideRouterStore()]
