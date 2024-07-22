@@ -12,17 +12,17 @@ import { LoginResponseDto } from "./dtos/login-response.dto";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     // to be updated
-    private baseUrl = 'http://localhost:8052/auth';
+    private baseUrl = 'http://localhost:8052/auth/api/v1/auth';
     private jwtHelper = new JwtHelperService();
 
     constructor(private http: HttpClient) {}
 
-    register(user: RegisterDto): Observable<RegisterResponseDto> {
-        return this.http.post<RegisterResponseDto>(`${this.baseUrl}/register`, user);
+    register(user: RegisterDto, isAdmin: boolean): Observable<RegisterResponseDto> {
+        return isAdmin ? this.http.post<RegisterResponseDto>(`${this.baseUrl}/signup/admin`, user) : this.http.post<RegisterResponseDto>(`${this.baseUrl}/signup`, user);
     }
 
     login(credentials: LoginDto): Observable<LoginResponseDto> {
-        return this.http.post<LoginResponseDto>(`${this.baseUrl}/login`, credentials);
+        return this.http.post<LoginResponseDto>(`${this.baseUrl}/signin`, credentials);
     }
 
     getToken(): string | null {
