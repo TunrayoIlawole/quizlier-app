@@ -4,11 +4,12 @@ import { RegisterDto } from "../dtos/register.dto";
 
 export const LOGIN_START = '[Auth] Login Start';
 export const LOGIN_SUCCESS = '[Auth] Login';
-export const LOGIN_FAIL = '[Auth] Login Fail';
+// export const LOGIN_FAIL = '[Auth] Login Fail';
 
 export const REGISTER_START = '[Auth] Register Start';
+export const REGISTER_START_ADMIN = '[Auth] Register Start Admin';
 export const REGISTER_SUCCESS = '[Auth] Register';
-export const REGISTER_FAIL = '[Auth] Register Fail';
+export const AUTH_FAIL = '[Auth] Auth Fail';
 
 export const LOGOUT = '[Auth] Logout';
 
@@ -42,12 +43,18 @@ export class RegisterStart implements Action {
     constructor(public payload: RegisterDto) {}
 }
 
+export class RegisterStartAdmin implements Action {
+    readonly type = REGISTER_START_ADMIN;
+
+    constructor(public payload: RegisterDto) {}
+}
+
 export class RegisterSuccess implements Action {
     readonly type = REGISTER_SUCCESS;
 }
 
-export class RegisterFail implements Action {
-    readonly type = REGISTER_FAIL;
+export class AuthFail implements Action {
+    readonly type = AUTH_FAIL;
 
     constructor(public payload: string) {}
 }

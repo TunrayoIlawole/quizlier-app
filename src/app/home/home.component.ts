@@ -19,5 +19,9 @@ export class HomeComponent {
   signup() {
     this.router.navigate(['/auth/register']);
   }
+  
+  signupAdmin(role: string) {
+    this.router.navigate(['/auth/register'], { queryParams: { role }});
+  }
 
 }

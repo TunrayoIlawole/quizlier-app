@@ -28,22 +28,45 @@ const handleError = (errorRes: any) => {
     let errorMessage = "An unknown error occured";
 
     if (!errorRes.status || !errorRes.message) {
-        return of(new AuthActions.RegisterFail(errorMessage));
+        return of(new AuthActions.AuthFail(errorMessage));
     }
 
     // update action to be more general
-    return of(new AuthActions.RegisterFail(errorRes.message));
+    return of(new AuthActions.AuthFail(errorRes.message));
 }
 
 @Injectable()
 export class AuthEffects {
-    constructor(private actions$: Actions, private http: HttpClient, private authService: AuthService, private router: Router) {}
+    constructor(
+        private actions$: Actions, 
+        private http: HttpClient, 
+        private authService: AuthService, 
+        private router: Router
+    ) {}
     authSignup$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(AuthActions.REGISTER_START),
             switchMap((signupAction: AuthActions.RegisterStart) => {
-                return this.authService.register(signupAction.payload)
+                return this.authService.register(signupAction.payload, false)
                 .pipe(
+                    map((resData: RegisterResponseDto) => {
+                        return new AuthActions.RegisterSuccess();
+                    }),
+                    catchError(errorRes => {
+                        return handleError(errorRes)
+                    })
+                )
+            })
+        )
+    });
+
+    authSignupAdmin$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(AuthActions.REGISTER_START_ADMIN),
+            switchMap((signupAction: AuthActions.RegisterStartAdmin) => {
+                return this.authService.register(signupAction.payload, true)
+                .pipe(
+                    tap(() => console.log("It got to the effect")),
                     map((resData: RegisterResponseDto) => {
                         return new AuthActions.RegisterSuccess();
                     }),
@@ -77,6 +100,7 @@ export class AuthEffects {
             ofType(AuthActions.REGISTER_SUCCESS),
             tap((authSuccessAction: AuthActions.RegisterSuccess) => {
                 // do somthing here : redirect to sign in page maybe
+                this.router.navigate(['/login']);
             })
         )
     })

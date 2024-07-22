@@ -21,13 +21,12 @@ export function AuthReducer(state = initialState, action): UserState {
                 authError: null,
                 loading: false
             };
-        case AuthActions.LOGIN_FAIL:
-            return {
-                ...state,
-                token: null,
-                authError: action.payload,
-                loading: false
-            };
+        // case AuthActions.LOGIN_FAIL:
+        //     return {
+        //         ...state,
+        //         authError: action.payload,
+        //         loading: false
+        //     };
         case AuthActions.LOGOUT:
             return {
                 ...state,
@@ -40,15 +39,22 @@ export function AuthReducer(state = initialState, action): UserState {
                 authError: null,
                 loading: true
             };
+        case AuthActions.REGISTER_START_ADMIN:
+            return {
+                ...state,
+                authError: null,
+                loading: true
+            };
         case AuthActions.REGISTER_SUCCESS:
             return {
                 ...state,
                 authError: null,
                 loading: false
             };
-        case AuthActions.REGISTER_FAIL:
+        case AuthActions.AUTH_FAIL:
             return {
                 ...state,
+                token: null,
                 authError: action.payload,
                 loading: false
             };

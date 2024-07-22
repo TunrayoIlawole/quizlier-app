@@ -9,6 +9,7 @@ import * as AuthActions from '../state/auth.actions';
 import { Subscription } from 'rxjs';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { loadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { loadingSpinnerComponent } from '../../shared/loading-spinner/loading-sp
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+  role: string = 'player';
   signupForm: FormGroup;
   isLoading: boolean = false;
   error: string = '';
@@ -27,7 +29,7 @@ export class RegisterComponent implements OnInit {
   private closeSub: Subscription;
   private storeSub: Subscription;
 
-  constructor(private viewContainerRef: ViewContainerRef, private store: Store<fromApp.State>) {}
+  constructor(private viewContainerRef: ViewContainerRef, private store: Store<fromApp.State>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.storeSub = this.store.select('user').subscribe(authState => {
@@ -37,6 +39,10 @@ export class RegisterComponent implements OnInit {
         this.showErrorAlert(this.error);
       }
     });
+
+    this.route.queryParams.subscribe(params => {
+      this.role = params['role'] || 'player';
+    })
 
     this.signupForm = new FormGroup({
       'firstname': new FormControl(null, Validators.required),
@@ -58,12 +64,13 @@ export class RegisterComponent implements OnInit {
     const email = this.signupForm.get('email').value;
     const password = this.signupForm.get('password').value;
 
-    this.store.dispatch(new AuthActions.RegisterStart({ firstName: firstName, lastName: lastName, username: username, email: email, password: password }));
+    if (this.role === 'admin') {
+      this.store.dispatch(new AuthActions.RegisterStartAdmin({ firstName: firstName, lastName: lastName, username: username, email: email, password: password }));
+    } else {
+      this.store.dispatch(new AuthActions.RegisterStart({ firstName: firstName, lastName: lastName, username: username, email: email, password: password }));
+    }
 
     this.signupForm.reset();
-
-    // route to sign up page
-
   }
 
   private showErrorAlert(message: string) {
