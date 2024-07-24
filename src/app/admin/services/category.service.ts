@@ -19,15 +19,15 @@ export class CategoryService {
         return this.http.get<CategoryResponseDto[]>(`${this.baseUrl}`);
     }
 
-    getCategory(id: String): Observable<CategoryResponseDto> {
+    getCategory(id: String | number): Observable<CategoryResponseDto> {
         return this.http.get<CategoryResponseDto>(`${this.baseUrl}/${id}`)
     }
 
-    updateCategory(id: String): Observable<CategoryResponseDto> {
-        return this.http.get<CategoryResponseDto>(`${this.baseUrl}/${id}`)
+    updateCategory(id: String, category: CategoryRequestDto): Observable<CategoryResponseDto> {
+        return this.http.put<CategoryResponseDto>(`${this.baseUrl}/${id}`, category);
     }
 
     deleteCategory(id: String): Observable<CategoryResponseDto> {
-        return this.http.get<CategoryResponseDto>(`${this.baseUrl}/${id}`)
+        return this.http.delete<CategoryResponseDto>(`${this.baseUrl}/${id}`);
     }
 }
