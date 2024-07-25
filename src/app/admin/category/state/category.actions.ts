@@ -13,6 +13,7 @@ export const LOAD_ITEM_SUCCESS = '[Category] Load item success';
 export const LOAD_ITEMS = '[Category] Load items';
 export const LOAD_ITEMS_SUCCESS = '[Category] Load items success';
 export const SELECT = '[Category] Select item';
+export const ERROR_RESPONSE = '[Category] Error response';
 
 
 export class AddItemAction implements Action {
@@ -30,7 +31,7 @@ export class AddItemActionSuccess implements Action {
 export class UpdateItemAction implements Action {
     readonly type = UPDATE_ITEM;
 
-    constructor(public category: CategoryRequestDto, public setCurrent = false) {}
+    constructor(public id: number | string, public category: CategoryRequestDto, public setCurrent = false) {}
 }
 
 export class UpdateItemActionSuccess implements Action {
@@ -42,19 +43,19 @@ export class UpdateItemActionSuccess implements Action {
 export class DeleteItemAction implements Action {
     readonly type = DELETE_ITEM;
 
-    constructor(public id: number) {}
+    constructor(public id: number | string) {}
 }
 
 export class DeleteItemSuccessAction implements Action {
     readonly type = DELETE_ITEM_SUCCESS;
 
-    constructor(public id: number) {}
+    constructor(public id: number | string) {}
 }
 
 export class LoadItemAction implements Action {
     readonly type = LOAD_ITEM;
 
-    constructor(public id: number) { }
+    constructor(public id: number | string) { }
 }
 
 export class LoadItemSuccessAction implements Action {
@@ -77,5 +78,12 @@ export class LoadItemsSuccessAction implements Action {
 export class SelectAction implements Action {
     readonly type = SELECT;
   
-    constructor(public payload: number) { }
+    constructor(public payload: number | string) { }
 }
+
+export class ErrorResponse implements Action {
+    readonly type = ERROR_RESPONSE;
+  
+    constructor(public error: string) {
+    }
+  }
