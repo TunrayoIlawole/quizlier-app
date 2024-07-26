@@ -1,11 +1,12 @@
+import { Option } from "../models/option.interface";
 import { OptionResponseDto } from "./option-response.dto";
 
-export interface QuestionResponseDto {
+export interface QuestionResponseFullDto {
     status: string;
     message: string;
     data : {
         id; number,
         question: string,
-        options: OptionResponseDto[]
+        options: Option[]
     }
 }

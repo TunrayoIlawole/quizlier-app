@@ -1,3 +1,5 @@
 export interface Option {
-    id: number
+    id: number,
+    option_text: string,
+    isCorrect: boolean
 }

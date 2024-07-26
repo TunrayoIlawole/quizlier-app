@@ -1,3 +1,7 @@
+import { Option } from "./option.interface";
+
 export interface Question {
-    id: number
+    id: number,
+    question: string,
+    options?: Option[]
 }
