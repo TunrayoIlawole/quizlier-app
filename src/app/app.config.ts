@@ -11,6 +11,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { provideHttpClient } from '@angular/common/http';
+import { CategoryComponent } from './admin/category/category.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -18,6 +20,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
   ]},
+  { path: 'admin', component: AdminComponent},
   { path: '**', redirectTo: '' }
 ]
 
