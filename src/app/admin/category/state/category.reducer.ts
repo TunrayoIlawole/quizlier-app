@@ -1,4 +1,4 @@
-import { Action } from "@ngrx/store";
+import { Action, createFeatureSelector, createSelector, State } from "@ngrx/store";
 import { Category } from "../../models/category.interface";
 import * as CategoryActions from "./category.actions";
 import { act } from "@ngrx/effects";
@@ -81,3 +81,7 @@ export function CategoryReducer(state = initialState, action: Action): CategoryS
             return state;
     }
 }
+
+export const getCategoryState = createFeatureSelector<CategoryState>('categories');
+export const getCategories = createSelector(getCategoryState, (state: CategoryState) => state.categories);
+export const getCategory = createSelector(getCategoryState, (state: CategoryState) => state.currentCategory);

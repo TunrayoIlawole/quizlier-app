@@ -1,12 +1,12 @@
-import { Action } from "@ngrx/store";
+import { Action, createFeatureSelector, createSelector } from "@ngrx/store";
 import { Option } from "../../models/option.interface";
 import * as OptionActions from "./option.actions";
 import { OptionResponseDto } from "../../dto/option-response.dto";
 
 export interface OptionState {
-    options: OptionResponseDto[];
+    options: Option[];
     questionId: string | number;
-    currentOption: OptionResponseDto;
+    currentOption: Option;
     error: string;
     loading: boolean;
 }
@@ -49,7 +49,7 @@ export function OptionReducer(state = initialState, action: Action): OptionState
             const newState = {
                 ...state,
                 options: state.options.map(option => {
-                    if (option.data.id !=- updatedItem.data.id) {
+                    if (option.id !=- updatedItem.id) {
                         return option;
                     } else {
                         return updatedItem;
@@ -64,7 +64,7 @@ export function OptionReducer(state = initialState, action: Action): OptionState
         case OptionActions.DELETE_ITEM_SUCCESS:
             return {
                 ...state,
-                options: state.options.filter(option => option.data.id !== (action as OptionActions.DeleteItemSuccessAction).id),
+                options: state.options.filter(option => option.id !== (action as OptionActions.DeleteItemSuccessAction).id),
                 error: null,
                 loading: false
             };
@@ -85,3 +85,8 @@ export function OptionReducer(state = initialState, action: Action): OptionState
             return state;
     }
 }
+
+
+export const getOptionState = createFeatureSelector<OptionState>('options');
+export const getOptions = createSelector(getOptionState, (state: OptionState) => state.options);
+export const getOption = createSelector(getOptionState, (state: OptionState) => state.currentOption);

@@ -1,12 +1,13 @@
-import { Action } from "@ngrx/store";
+import { Action, createFeatureSelector, createSelector } from "@ngrx/store";
 import { Option } from "../../models/option.interface";
 import * as QuestionActions from "./question.actions";
 import { QuestionResponseDto } from "../../dto/question-response.dto";
+import { Question } from "../../models/question.interface";
 
 export interface QuestionState {
-    questions: QuestionResponseDto[];
+    questions: Question[];
     categoryId: string | number;
-    currentQuestion: QuestionResponseDto;
+    currentQuestion: Question;
     error: string;
     loading: boolean;
 }
@@ -49,7 +50,7 @@ export function QuestionReducer(state = initialState, action: Action): QuestionS
             const newState = {
                 ...state,
                 questions: state.questions.map(question => {
-                    if (question.data.id !=- updatedItem.data.id) {
+                    if (question.id !=- updatedItem.id) {
                         return question;
                     } else {
                         return updatedItem;
@@ -64,7 +65,7 @@ export function QuestionReducer(state = initialState, action: Action): QuestionS
         case QuestionActions.DELETE_ITEM_SUCCESS:
             return {
                 ...state,
-                questions: state.questions.filter(option => option.data.id !== (action as QuestionActions.DeleteItemSuccessAction).id),
+                questions: state.questions.filter(option => option.id !== (action as QuestionActions.DeleteItemSuccessAction).id),
                 error: null,
                 loading: false
             };
@@ -85,3 +86,7 @@ export function QuestionReducer(state = initialState, action: Action): QuestionS
             return state;
     }
 }
+
+export const getQuestionState = createFeatureSelector<QuestionState>('questions');
+export const getQuestions = createSelector(getQuestionState, (state: QuestionState) => state.questions);
+export const getQuestion = createSelector(getQuestionState, (state: QuestionState) => state.currentQuestion);
