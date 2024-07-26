@@ -26,7 +26,7 @@ export class AddItemAction implements Action {
 export class AddItemActionSuccess implements Action {
     readonly type = ADD_ITEM_SUCCESS;
 
-    constructor(public question: QuestionResponseDto, public categoryId: string | number) {}
+    constructor(public question: Question, public categoryId: string | number) {}
 }
 
 export class UpdateItemAction implements Action {
@@ -38,7 +38,7 @@ export class UpdateItemAction implements Action {
 export class UpdateItemActionSuccess implements Action {
     readonly type = UPDATE_ITEM_SUCCESS;
 
-    constructor(public question: QuestionResponseDto, public setCurrent = false) {}
+    constructor(public question: Question, public setCurrent = false) {}
 }
 
 export class DeleteItemAction implements Action {
@@ -62,7 +62,7 @@ export class LoadItemAction implements Action {
 export class LoadItemSuccessAction implements Action {
     readonly type = LOAD_ITEM_SUCCESS;
 
-    constructor(public question: QuestionResponseDto) {}
+    constructor(public question: Question) {}
 }
 
 export class LoadItemsAction implements Action {
@@ -74,7 +74,7 @@ export class LoadItemsAction implements Action {
 export class LoadItemsSuccessAction implements Action {
     readonly type = LOAD_ITEMS_SUCCESS;
 
-    constructor(public questions: QuestionResponseDto[], public categoryId: string | number) {}
+    constructor(public questions: Question[], public categoryId: string | number) {}
 }
 
 export class ErrorResponse implements Action {

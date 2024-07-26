@@ -34,7 +34,7 @@ export class OptionEffects {
                 return this.optionService.createOption(optionAction.option, optionAction.questionId)
                 .pipe(
                     map((resData: OptionResponseDto) => {
-                        return new OptionsActions.AddItemActionSuccess(resData, optionAction.questionId);
+                        return new OptionsActions.AddItemActionSuccess(resData.data, optionAction.questionId);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -52,7 +52,7 @@ export class OptionEffects {
                 return this.optionService.getOptions(optionAction.questionId)
                 .pipe(
                     map((resData: OptionResponseDto[]) => {
-                        return new OptionsActions.LoadItemsSuccessAction(resData, optionAction.questionId);
+                        return new OptionsActions.LoadItemsSuccessAction(resData.map(res => res.data), optionAction.questionId);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -69,7 +69,7 @@ export class OptionEffects {
                 return this.optionService.getOption(optionAction.id)
                 .pipe(
                     map((resData: OptionResponseDto) => {
-                        return new OptionsActions.LoadItemSuccessAction(resData);
+                        return new OptionsActions.LoadItemSuccessAction(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -86,7 +86,7 @@ export class OptionEffects {
                 return this.optionService.updateOption(optionAction.id)
                 .pipe(
                     map((resData: OptionResponseDto) => {
-                        return new OptionsActions.UpdateItemActionSuccess(resData);
+                        return new OptionsActions.UpdateItemActionSuccess(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes);

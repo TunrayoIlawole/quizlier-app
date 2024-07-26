@@ -26,7 +26,7 @@ export class AddItemAction implements Action {
 export class AddItemActionSuccess implements Action {
     readonly type = ADD_ITEM_SUCCESS;
 
-    constructor(public option: OptionResponseDto, public questionId: string | number) {}
+    constructor(public option: Option, public questionId: string | number) {}
 }
 
 export class UpdateItemAction implements Action {
@@ -38,7 +38,7 @@ export class UpdateItemAction implements Action {
 export class UpdateItemActionSuccess implements Action {
     readonly type = UPDATE_ITEM_SUCCESS;
 
-    constructor(public option: OptionResponseDto, public setCurrent = false) {}
+    constructor(public option: Option, public setCurrent = false) {}
 }
 
 export class DeleteItemAction implements Action {
@@ -62,7 +62,7 @@ export class LoadItemAction implements Action {
 export class LoadItemSuccessAction implements Action {
     readonly type = LOAD_ITEM_SUCCESS;
 
-    constructor(public option: OptionResponseDto) {}
+    constructor(public option: Option) {}
 }
 
 export class LoadItemsAction implements Action {
@@ -74,7 +74,7 @@ export class LoadItemsAction implements Action {
 export class LoadItemsSuccessAction implements Action {
     readonly type = LOAD_ITEMS_SUCCESS;
 
-    constructor(public payload: OptionResponseDto[], public questionId: string | number) {}
+    constructor(public payload: Option[], public questionId: string | number) {}
 }
 
 

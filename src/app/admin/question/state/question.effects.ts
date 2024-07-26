@@ -34,7 +34,7 @@ export class QuestionEffects {
                 return this.questionService.createQuestion(questionAction.question, questionAction.categoryId)
                 .pipe(
                     map((resData: QuestionResponseDto) => {
-                        return new QuestionActions.AddItemActionSuccess(resData, questionAction.categoryId);
+                        return new QuestionActions.AddItemActionSuccess(resData.data, questionAction.categoryId);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -52,7 +52,7 @@ export class QuestionEffects {
                 return this.questionService.getQuestions(questionAction.categoryId)
                 .pipe(
                     map((resData: QuestionResponseDto[]) => {
-                        return new QuestionActions.LoadItemsSuccessAction(resData, questionAction.categoryId);
+                        return new QuestionActions.LoadItemsSuccessAction(resData.map(res => res.data), questionAction.categoryId);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -69,7 +69,7 @@ export class QuestionEffects {
                 return this.questionService.getQuestion(questionAction.id)
                 .pipe(
                     map((resData: QuestionResponseDto) => {
-                        return new QuestionActions.LoadItemSuccessAction(resData);
+                        return new QuestionActions.LoadItemSuccessAction(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -86,7 +86,7 @@ export class QuestionEffects {
                 return this.questionService.updateQuestion(questionAction.id)
                 .pipe(
                     map((resData: QuestionResponseDto) => {
-                        return new QuestionActions.UpdateItemActionSuccess(resData);
+                        return new QuestionActions.UpdateItemActionSuccess(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes);

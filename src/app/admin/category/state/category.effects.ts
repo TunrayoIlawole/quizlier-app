@@ -34,7 +34,7 @@ export class CategoryEffects {
                 return this.categoryService.createCategory(categoryAction.category)
                 .pipe(
                     map((resData: CategoryResponseDto) => {
-                        return new CategoryActions.AddItemActionSuccess(resData);
+                        return new CategoryActions.AddItemActionSuccess(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -52,7 +52,8 @@ export class CategoryEffects {
                 return this.categoryService.getCategories()
                 .pipe(
                     map((resData: CategoryResponseDto[]) => {
-                        return new CategoryActions.LoadItemsSuccessAction(resData);
+
+                        return new CategoryActions.LoadItemsSuccessAction(resData.map(res => res.data));
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -69,7 +70,7 @@ export class CategoryEffects {
                 return this.categoryService.getCategory(categoryAction.id)
                 .pipe(
                     map((resData: CategoryResponseDto) => {
-                        return new CategoryActions.LoadItemSuccessAction(resData);
+                        return new CategoryActions.LoadItemSuccessAction(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -86,7 +87,7 @@ export class CategoryEffects {
                 return this.categoryService.updateCategory(categoryAction.id, categoryAction.category)
                 .pipe(
                     map((resData: CategoryResponseDto) => {
-                        return new CategoryActions.UpdateItemActionSuccess(resData);
+                        return new CategoryActions.UpdateItemActionSuccess(resData.data);
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes);
