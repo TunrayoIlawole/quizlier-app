@@ -1,0 +1,20 @@
+<h1>Categories</h1>
+<div>
+    <a [routerLink]="['/categories/create']" class='btn btn-success'>Add new</a>
+  </div>
+
+  <div class="container">
+    <div class="categories-container">
+        <div class="category" *ngFor="let category of categories" [routerLink]="['/categories', category.id]">
+            <h4>{{category.name}}</h4>
+            <div class="activity-btns">
+                <div class="edit-btn">
+                    <a [routerLink]="['/categories/', category.id, 'edit']" class='btn btn-warning'>Edit</a>
+                </div>
+                <div class="delete-btn">
+                    <button type="button" class="btn btn-danger" (click)='deleteCategory(category)'>Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

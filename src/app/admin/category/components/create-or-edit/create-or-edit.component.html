@@ -1,0 +1,21 @@
+<div [hidden]="submitted" class="container">
+    <h3>{{category ? 'Update' : 'Create'}} Todo</h3>
+
+    <form [formGroup]="categoryForm">
+        <div class = "form-group">
+            <label for = "categoryname">Category Name</label>
+            <input type = "text" id = "categoryname" class = "form-control" formControlName = "categoryname">
+        </div>
+
+        <div class = "form-group">
+            <label for = "description">Category Description</label>
+            <input type = "text" id = "description" class = "form-control" formControlName = "description">
+        </div>
+
+        <div class="row">
+            <button class="btn btn-success" (click)="createOrUpdateCategory()" [disabled]="isSubmitting">
+                {{category ? 'Update' : 'Create'}}
+              </button>
+        </div>
+    </form>
+</div>

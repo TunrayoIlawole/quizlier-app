@@ -1,0 +1,28 @@
+<div *ngIf="category" class="container">
+    <div>
+        <h2>{{category.name}}</h2>
+        <br />
+        Description
+        {{category.description}}
+    </div>
+
+    <div class="question-container">
+        <h3>Questions for {{category.name}} category</h3>
+        <div>
+            <a [routerLink]="['/questions/create']" class='btn btn-success'>Add new</a>
+          </div>
+        <div class="question" *ngFor="let question of questions">
+            <app-question-card [question]="question"></app-question-card>
+        </div>
+    </div>
+
+    <div class="btn-group btn-group-sm">
+        <a routerLink="/" type="button" class="btn btn-success">Back</a>
+        &nbsp;
+        <a class="btn btn-warning" [routerLink]="['/', category.id,'edit']">Edit</a>
+      </div>
+
+      <!-- <div *ngIf="showForm">
+        <app-question-create-edit [category]="category"></app-question-create-edit>
+    </div> -->
+</div>
