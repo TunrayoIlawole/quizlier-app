@@ -1,0 +1,15 @@
+<div class="card-container">
+    <div class="question-card" [routerLink]="['/questions', question.id]">
+        <p>{{question.question}}</p>
+
+        <div class="activity-btns">
+            <div class="edit-btn">
+                <a [routerLink]="['/', question.id, 'edit']" class='btn btn-warning'>Edit</a>
+            </div>
+            <div class="delete-btn">
+                <button type="button" class="btn btn-danger" (click)='deleteQuestion(question.id)'>Delete</button>
+            </div>
+        </div>
+    </div>
+
+</div>

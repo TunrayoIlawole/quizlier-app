@@ -1,0 +1,14 @@
+<div class="">
+    <form [formGroup]="questionForm">
+        <div class = "form-group">
+            <label for = "question">Question</label>
+            <input type = "text" id = "question" class = "form-control" formControlName = "question">
+        </div>
+
+        <div class="row">
+            <button class="btn btn-success" (click)="createOrUpdateQuestion()" [disabled]="isSubmitting">
+                {{question ? 'Update' : 'Create'}}
+              </button>
+        </div>
+      </form>
+</div>

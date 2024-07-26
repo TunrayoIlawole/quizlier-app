@@ -1,0 +1,23 @@
+<div *ngIf="question" class="question-detail">
+    <div>
+        <h2>{{question.question}}</h2>
+    </div>
+
+    <div class="options-container">
+        <h3>Options for question {{question.id}}</h3>
+        <div>
+            <a *ngIf="options.length < 4" [routerLink]="['/options/create']" class='btn btn-success'>Add new</a>
+          </div>
+        <div class="option" *ngFor="let option of options">
+            <app-option-card [option]="option"></app-option-card>
+        </div>
+    </div>
+
+
+    <div class="btn-group btn-group-sm">
+        <a routerLink="/" type="button" class="btn btn-success">Back</a>
+        &nbsp;
+        <a class="btn btn-warning" [routerLink]="['/', question.id,'edit']">Edit</a>
+      </div>
+
+</div>
