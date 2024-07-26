@@ -1,0 +1,22 @@
+<div class="card-container">
+    <div class="question-card">
+        <p>{{option.option_text}}</p>
+    </div>
+
+</div>
+
+<div class="card-container">
+    <div class="option-card" [routerLink]="['/options', option.id]">
+        <p>{{option.option_text}}</p>
+
+        <div class="activity-btns">
+            <div class="edit-btn">
+                <a [routerLink]="['/', option.id, 'edit']" class='btn btn-warning'>Edit</a>
+            </div>
+            <div class="delete-btn">
+                <button type="button" class="btn btn-danger" (click)='deleteOption(option.id)'>Delete</button>
+            </div>
+        </div>
+    </div>
+
+</div>
