@@ -16,7 +16,7 @@ import { Category } from '../../../models/category.interface';
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListComponent implements OnInit {
+export class CategoryListComponent implements OnInit {
   categories: Category[];
 
   constructor(

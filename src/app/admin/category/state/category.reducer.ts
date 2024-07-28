@@ -82,6 +82,6 @@ export function CategoryReducer(state = initialState, action: Action): CategoryS
     }
 }
 
-export const getCategoryState = createFeatureSelector<CategoryState>('categories');
+export const getCategoryState = createFeatureSelector<CategoryState>('category');
 export const getCategories = createSelector(getCategoryState, (state: CategoryState) => state.categories);
 export const getCategory = createSelector(getCategoryState, (state: CategoryState) => state.currentCategory);

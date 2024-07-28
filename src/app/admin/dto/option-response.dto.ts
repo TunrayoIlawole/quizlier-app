@@ -3,7 +3,7 @@ export interface OptionResponseDto {
     message: string;
     data : {
         id; number,
-        option_text: string,
+        optionText: string,
         isCorrect: boolean
     }
 }

@@ -32,7 +32,7 @@ export class QuestionDetailsComponent implements OnInit {
 
    ngOnInit(): void {
     this.route.params.subscribe(param => {
-      const id = param['id'];
+      const id = param['questionId'];
 
       if (id) {
         this.store.dispatch(new QuestionActions.LoadItemAction(id));

@@ -13,6 +13,18 @@ import { HomeComponent } from './home/home.component';
 import { provideHttpClient } from '@angular/common/http';
 import { CategoryComponent } from './admin/category/category.component';
 import { AdminComponent } from './admin/admin.component';
+import { CategoryListComponent } from './admin/category/components/list/list.component';
+import { CategoryCreateOrEditComponent } from './admin/category/components/create-or-edit/create-or-edit.component';
+import { CategoryDetailsComponent } from './admin/category/components/details/details.component';
+import { QuestionCreateEditComponent } from './admin/question/components/question-create-edit/question-create-edit.component';
+import { QuestionDetailsComponent } from './admin/question/components/question-details/question-details.component';
+import { OptionCreateEditComponent } from './admin/option/components/option-create-edit/option-create-edit.component';
+import { CategoryEffects } from './admin/category/state/category.effects';
+import { QuestionEffects } from './admin/question/state/question.effects';
+import { OptionEffects } from './admin/option/state/options.effects';
+import { CategoryReducer } from './admin/category/state/category.reducer';
+import { QuestionReducer } from './admin/question/state/question.reducer';
+import { OptionReducer } from './admin/option/state/options.reducer';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -20,7 +32,19 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
   ]},
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin', component: AdminComponent },
+  { path: 'categories', component: CategoryComponent, children: [
+    { path: '', component: CategoryListComponent },
+    { path: 'create', component: CategoryCreateOrEditComponent },
+    { path: ':id', component: CategoryDetailsComponent },
+    { path: ':id/edit', component: CategoryCreateOrEditComponent },
+    { path: ':id/questions/create', component: QuestionCreateEditComponent },
+    { path: ':id/questions/:questionId', component: QuestionDetailsComponent },
+    { path: ':id/questions/:questionId/edit', component: QuestionCreateEditComponent },
+    { path: ':id/questions/:questionId/options/create', component: OptionCreateEditComponent },
+    { path: ':id/questions/:questionId/options/:optionId/edit', component: OptionCreateEditComponent },
+
+  ]},
   { path: '**', redirectTo: '' }
 ]
 
@@ -29,7 +53,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     provideState({ name: 'user', reducer: AuthReducer}),
-    provideEffects(AuthEffects),
+    provideState({ name: 'category', reducer: CategoryReducer}),
+    provideState({ name: 'question', reducer: QuestionReducer}),
+    provideState({ name: 'option', reducer: OptionReducer}),
+    provideEffects(AuthEffects, CategoryEffects, QuestionEffects, OptionEffects),
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes, withComponentInputBinding()),
     provideRouterStore()]

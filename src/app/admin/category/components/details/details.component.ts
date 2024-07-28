@@ -22,7 +22,7 @@ import { QuestionCreateEditComponent } from '../../../question/components/questi
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
-export class DetailsComponent implements OnInit {
+export class CategoryDetailsComponent implements OnInit {
 
   category: Category;
   questions: Question[];

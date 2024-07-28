@@ -87,6 +87,6 @@ export function QuestionReducer(state = initialState, action: Action): QuestionS
     }
 }
 
-export const getQuestionState = createFeatureSelector<QuestionState>('questions');
+export const getQuestionState = createFeatureSelector<QuestionState>('question');
 export const getQuestions = createSelector(getQuestionState, (state: QuestionState) => state.questions);
 export const getQuestion = createSelector(getQuestionState, (state: QuestionState) => state.currentQuestion);

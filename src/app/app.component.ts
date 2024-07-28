@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthComponent } from './auth/auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AdminComponent } from './admin/admin.component';
+import { CategoryComponent } from './admin/category/category.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,10 @@ import { CommonModule } from '@angular/common';
      CommonModule,
      ReactiveFormsModule,
      HomeComponent, 
-     AuthComponent],
+     AuthComponent,
+     AdminComponent,
+     CategoryComponent
+    ],
   providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

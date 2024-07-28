@@ -18,7 +18,7 @@ import { Category } from '../../../models/category.interface';
   templateUrl: './create-or-edit.component.html',
   styleUrl: './create-or-edit.component.css'
 })
-export class CreateOrEditComponent implements OnInit {
+export class CategoryCreateOrEditComponent implements OnInit {
 
   category: Category;
   categoryForm: FormGroup;

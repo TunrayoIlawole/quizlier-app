@@ -4,7 +4,7 @@
 
         <div class="activity-btns">
             <div class="edit-btn">
-                <a [routerLink]="['/', question.id, 'edit']" class='btn btn-warning'>Edit</a>
+                <a [routerLink]="['/questions', question.id, 'edit']" class='btn btn-warning'>Edit</a>
             </div>
             <div class="delete-btn">
                 <button type="button" class="btn btn-danger" (click)='deleteQuestion(question.id)'>Delete</button>

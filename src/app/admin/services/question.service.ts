@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { QuestionRequestDto } from "../dto/question-request.dto";
-import { QuestionResponseDto } from "../dto/question-responsefull.dto";
+import { QuestionResponseDto } from "../dto/question-response.dto";
 
 @Injectable({ providedIn: 'root' })
 export class QuestionService {

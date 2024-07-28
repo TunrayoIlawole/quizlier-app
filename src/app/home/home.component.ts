@@ -24,4 +24,8 @@ export class HomeComponent {
     this.router.navigate(['/auth/register'], { queryParams: { role }});
   }
 
+  admin() {
+    this.router.navigate(['/admin'])
+  }
+
 }

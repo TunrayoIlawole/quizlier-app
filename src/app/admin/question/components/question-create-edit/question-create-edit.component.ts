@@ -40,8 +40,8 @@ export class QuestionCreateEditComponent implements OnInit {
     });
 
     this.route.params.subscribe(params => {
-      const id = params['id'];
-      const categoryId = params['categoryId']
+      const id = params['questionId'];
+      const categoryId = params['id'];
 
       if (id && categoryId) {
         this.store.dispatch(new QuestionActions.LoadItemAction(id));

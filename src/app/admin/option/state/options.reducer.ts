@@ -87,6 +87,6 @@ export function OptionReducer(state = initialState, action: Action): OptionState
 }
 
 
-export const getOptionState = createFeatureSelector<OptionState>('options');
+export const getOptionState = createFeatureSelector<OptionState>('option');
 export const getOptions = createSelector(getOptionState, (state: OptionState) => state.options);
 export const getOption = createSelector(getOptionState, (state: OptionState) => state.currentOption);
