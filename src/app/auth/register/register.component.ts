@@ -65,9 +65,9 @@ export class RegisterComponent implements OnInit {
     const password = this.signupForm.get('password').value;
 
     if (this.role === 'admin') {
-      this.store.dispatch(new AuthActions.RegisterStartAdmin({ firstName: firstName, lastName: lastName, username: username, email: email, password: password }));
+      this.store.dispatch(new AuthActions.RegisterStartAdmin({ registerDto: { firstName: firstName, lastName: lastName, username: username, email: email, password: password }, isAdmin: true }));
     } else {
-      this.store.dispatch(new AuthActions.RegisterStart({ firstName: firstName, lastName: lastName, username: username, email: email, password: password }));
+      this.store.dispatch(new AuthActions.RegisterStart({ registerDto: {firstName: firstName, lastName: lastName, username: username, email: email, password: password }, isAdmin: false }));
     }
 
     this.signupForm.reset();
