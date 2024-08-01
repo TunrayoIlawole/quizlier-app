@@ -29,8 +29,7 @@ export class AuthService {
         return localStorage.getItem('token');
     }
 
-    getTokenExpirationDate(): Date | null {
-        const token = this.getToken();
+    getTokenExpirationDate(token: string): Date | null {
         if (!token) return null;
 
         return this.jwtHelper.getTokenExpirationDate(token);
