@@ -18,6 +18,7 @@ const handleAuthentication = (expiresIn: Date, email: string, username: string, 
     return new AuthActions.LoginSuccess({
         email: email,
         id: id,
+        username: username,
         token: token,
         expirationDate: expirationDate,
         redirect: true
@@ -47,7 +48,7 @@ export class AuthEffects {
         return this.actions$.pipe(
             ofType(AuthActions.REGISTER_START),
             switchMap((signupAction: AuthActions.RegisterStart) => {
-                return this.authService.register(signupAction.payload, false)
+                return this.authService.register(signupAction.payload.registerDto, signupAction.payload.isAdmin)
                 .pipe(
                     map((resData: RegisterResponseDto) => {
                         return new AuthActions.RegisterSuccess();
@@ -64,7 +65,7 @@ export class AuthEffects {
         return this.actions$.pipe(
             ofType(AuthActions.REGISTER_START_ADMIN),
             switchMap((signupAction: AuthActions.RegisterStartAdmin) => {
-                return this.authService.register(signupAction.payload, true)
+                return this.authService.register(signupAction.payload.registerDto, signupAction.payload.isAdmin)
                 .pipe(
                     tap(() => console.log("It got to the effect")),
                     map((resData: RegisterResponseDto) => {
@@ -84,8 +85,9 @@ export class AuthEffects {
             switchMap((authData: AuthActions.LoginStart) => {
                 return this.authService.login(authData.payload)
                 .pipe(
+                    tap(() => console.log('code got here')),
                     map((resData: LoginResponseDto) => {
-                        return handleAuthentication(this.authService.getTokenExpirationDate(), resData.data.email, resData.data.username, resData.data.id, resData.data.token)
+                        return handleAuthentication(this.authService.getTokenExpirationDate(resData.data.token), resData.data.email, resData.data.username, resData.data.id, resData.data.token)
                     }),
                     catchError(errorRes => {
                         return handleError(errorRes)
@@ -111,6 +113,7 @@ export class AuthEffects {
             tap((authSuccessAction: AuthActions.LoginSuccess) => {
                 if (authSuccessAction.payload.redirect) {
                     // redirect to quiz start page
+                    this.router.navigate(['']);
                 }
             })
         )

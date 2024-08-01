@@ -25,6 +25,7 @@ export class LoginSuccess implements Action {
     constructor(public payload: { 
         email: string,
         id: string,
+        username: String,
         token: string,
         expirationDate: Date,
         redirect: boolean
@@ -40,13 +41,19 @@ export class LoginFail implements Action {
 export class RegisterStart implements Action {
     readonly type = REGISTER_START;
 
-    constructor(public payload: RegisterDto) {}
+    constructor(public payload: {
+        registerDto: RegisterDto,
+        isAdmin: boolean
+    }) {}
 }
 
 export class RegisterStartAdmin implements Action {
     readonly type = REGISTER_START_ADMIN;
 
-    constructor(public payload: RegisterDto) {}
+    constructor(public payload: {
+        registerDto: RegisterDto,
+        isAdmin: boolean
+    }) {}
 }
 
 export class RegisterSuccess implements Action {
