@@ -25,15 +25,16 @@ import { OptionEffects } from './admin/option/state/options.effects';
 import { CategoryReducer } from './admin/category/state/category.reducer';
 import { QuestionReducer } from './admin/question/state/question.reducer';
 import { OptionReducer } from './admin/option/state/options.reducer';
+import { AdminGuard } from './auth/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'auth', component: AuthComponent, children: [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
   ]},
-  { path: 'admin', component: AdminComponent },
-  { path: 'categories', component: CategoryComponent, children: [
+  { path: 'admin', component: AdminComponent , canActivate: [AdminGuard]},
+  { path: 'categories', component: CategoryComponent, canActivate: [AdminGuard], children: [
     { path: '', component: CategoryListComponent },
     { path: 'create', component: CategoryCreateOrEditComponent },
     { path: ':id', component: CategoryDetailsComponent },
@@ -45,7 +46,8 @@ const routes: Routes = [
     { path: ':id/questions/:questionId/options/:optionId/edit', component: OptionCreateEditComponent },
 
   ]},
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
+  { path: '', redirectTo: 'home' }
 ]
 
 export const appConfig: ApplicationConfig = {
