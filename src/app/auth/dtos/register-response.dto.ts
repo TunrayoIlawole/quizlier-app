@@ -10,5 +10,3 @@ export interface RegisterResponseDto {
         userRole: string;
     }
 }
-
-// update this in the backend. Create response dto?

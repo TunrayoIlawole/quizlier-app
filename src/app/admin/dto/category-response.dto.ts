@@ -1,3 +1,5 @@
+import { Question } from "../models/question.interface";
+
 export interface CategoryResponseDto {
     status: string;
     message: string;
@@ -5,5 +7,6 @@ export interface CategoryResponseDto {
         id: string | number;
         name: string;
         description: string;
+        question?: Question[];
     }
 }

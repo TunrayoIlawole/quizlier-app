@@ -1,5 +1,6 @@
 export interface Option {
     id: number,
     optionText: string,
-    isCorrect: boolean
+    isCorrect: boolean,
+    questionId: number
 }

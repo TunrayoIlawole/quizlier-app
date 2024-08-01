@@ -2,8 +2,9 @@ export interface OptionResponseDto {
     status: string;
     message: string;
     data : {
-        id; number,
+        id: number,
         optionText: string,
-        isCorrect: boolean
+        isCorrect: boolean,
+        questionId: number
     }
 }
